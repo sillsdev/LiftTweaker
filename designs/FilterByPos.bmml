@@ -1,0 +1,64 @@
+<mockup version="1.0" skin="sketch">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="138" y="70" w="563" h="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Lift%20Tweaker</text>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::ButtonBar" x="138" y="93" w="-1" h="-1" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Open%20Lift%2C%20Choose%20Target%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::RoundButton" x="627" y="93" w="-1" h="-1" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>EmoticonIcon%7Csmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::ComboBox" x="356" y="93" w="-1" h="-1" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Children%27s</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Button" x="455" y="93" w="-1" h="-1" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Open%20With%20Lexique%20Pro</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::Tree" x="153" y="147" w="221" h="285" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>F%20Filter%0A%3E-%20by%20Parts%20Of%20Speech%0AF%20Prune%0A%3E-%20Relations%0A%3E-%20Individual%20entries</text>
+        <selectedIndex>1</selectedIndex>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::CheckBox" x="394" y="203" w="-1" h="-1" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Adjective</text>
+        <state>selected</state>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Label" x="394" y="147" w="280" h="72" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Include%20senses%20with%20these%20parts%20of%20speech%2C%20and%20remove%20words%20with%20no%20remaining%20senses</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::CheckBox" x="389" y="225" w="-1" h="-1" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>adverb</text>
+        <state>selected</state>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::CheckBox" x="404" y="240" w="-1" h="-1" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Adjective</text>
+        <state>selected</state>
+      </controlProperties>
+    </control>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::CheckBox" x="389" y="255" w="-1" h="-1" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Adjective</text>
+        <state>selected</state>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

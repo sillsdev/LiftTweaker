@@ -1,0 +1,11 @@
+syntax: glob
+sample/*.liftTweaks
+output\Debug/*.dll
+output\Debug/*.pdb
+*.suo
+src\obj\Debug
+_ReSharper*
+CachesImage.bin
+*.user
+*.XmlDocIndex
+*.Metadata
