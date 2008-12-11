@@ -7,11 +7,11 @@ using System.Xml;
 
 namespace Tweaker
 {
-    public class RelationRepository
+    public class RelationSource
     {
         private readonly LiftAccessor _accessor;
 
-        public RelationRepository(LiftAccessor accessor)
+        public RelationSource(LiftAccessor accessor)
         {
             _accessor = accessor;
         }

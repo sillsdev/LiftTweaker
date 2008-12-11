@@ -71,9 +71,13 @@ namespace Tweaker
             builder.Register<OpenWithLexiqueProCommand>();
             builder.Register<LiftAccessor>(c => new LiftAccessor(path));
             builder.Register<TweakProcess>(c => TweakProcess.Create("normal", c.Resolve<LiftAccessor>()));
-            builder.Register<RelationRepository>();
-            builder.Register<PruneRelationCollection>(c => c.Resolve<TweakProcess>().PruneRelationRepo);
+            builder.Register<RelationSource>();
+            builder.Register<PruneRelationCollection>(c => c.Resolve<TweakProcess>().PruneRelationCollection);
             builder.Register<PruneRelationsControl>();
+
+
+            builder.Register<LiftRange>(c => c.Resolve<LiftAccessor>().GetRange("grammatical-info"));
+            builder.Register<FilterRangeItemCollection>(c => c.Resolve<TweakProcess>().PartsOfSpeechToFilter);
             builder.Register<FilterByPartsOfSpeechControl>();
 
             _sessionContainer = builder.Build();

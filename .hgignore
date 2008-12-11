@@ -1,10 +1,9 @@
 syntax: glob
-sample/*.liftTweaks
-output\Debug/*.dll
-output\Debug/*.pdb
+Autofac.pdb
 *.suo
-src\obj\Debug
+src\obj
 _ReSharper*
+output
 CachesImage.bin
 *.user
 *.XmlDocIndex
