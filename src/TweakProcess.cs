@@ -12,6 +12,7 @@ namespace Tweaker
     {
         private LiftAccessor _liftAccessor;
         private PruneRelationCollection _pruneRelationRepository;
+        private FilterRangeItemCollection _partsOfSpeechToFilter;
         public string Name { get; set; }
 
         //for deserialization only
@@ -23,7 +24,7 @@ namespace Tweaker
             _liftAccessor = liftAccessor;
             Name = name;
             _pruneRelationRepository = new PruneRelationCollection();
-
+            _partsOfSpeechToFilter = new FilterRangeItemCollection();
         }
 
         public static TweakProcess Create(string name, LiftAccessor liftAccessor)
@@ -36,7 +37,7 @@ namespace Tweaker
                 {
                     var deserializer = new XmlSerializer(typeof(TweakProcess));
                     var t =  (TweakProcess) deserializer.Deserialize(reader);
-                    Debug.Assert(t.PruneRelationRepo!=null);
+                    Debug.Assert(t.PruneRelationCollection!=null);
                     t.InitializeAfterDeserialization(liftAccessor);
                     return t;
 
@@ -51,7 +52,7 @@ namespace Tweaker
 
 
 
-        public PruneRelationCollection PruneRelationRepo
+        public PruneRelationCollection PruneRelationCollection
         {
             get { return _pruneRelationRepository; }
             set { _pruneRelationRepository = value; }
@@ -124,6 +125,13 @@ namespace Tweaker
                                                                             _liftAccessor.PathToLift.LastIndexOf(".lift"));
                 return pathWithoutDotLift + "-" + Name + ".lift";
             }
+        }
+
+        public FilterRangeItemCollection PartsOfSpeechToFilter
+        {
+            get { return _partsOfSpeechToFilter; }
+            set { _partsOfSpeechToFilter = value; }
+
         }
 
         private void InitializeAfterDeserialization(LiftAccessor accessor)

@@ -7,12 +7,12 @@ namespace Tweaker
 {
     public partial class PruneRelationsControl : UserControl
     {
-        private readonly RelationRepository _relationRepository;
+        private readonly RelationSource _relationSource;
         private readonly PruneRelationCollection _pruneRelationRepo;
 
-        public PruneRelationsControl(RelationRepository relationRepository, PruneRelationCollection pruneRelationRepo)
+        public PruneRelationsControl(RelationSource relationSource, PruneRelationCollection pruneRelationRepo)
         {
-            _relationRepository = relationRepository;
+            _relationSource = relationSource;
             _pruneRelationRepo = pruneRelationRepo;
             InitializeComponent();
         }
@@ -40,7 +40,7 @@ namespace Tweaker
             _sourceEntryList.Sorted = true;
             _sourceEntryList.Items.Clear();
             
-            _sourceEntryList.Items.AddRange(_relationRepository.SourceEntries().ToArray());
+            _sourceEntryList.Items.AddRange(_relationSource.SourceEntries().ToArray());
             if(_sourceEntryList.Items.Count>0)
                 _sourceEntryList.SelectedIndex = 0;
 

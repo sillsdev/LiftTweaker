@@ -83,6 +83,7 @@
             this.Controls.Add(this._targetTable);
             this.Name = "FilterByPartsOfSpeechControl";
             this.Size = new System.Drawing.Size(386, 382);
+            this.Load += new System.EventHandler(this.OnLoad);
             this.ResumeLayout(false);
             this.PerformLayout();
 

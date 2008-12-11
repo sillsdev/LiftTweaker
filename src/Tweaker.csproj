@@ -53,6 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FilterRangeItemCollection.cs" />
+    <Compile Include="LiftRange.cs" />
     <Compile Include="ShellUI\AreaTree.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -69,7 +71,7 @@
     </Compile>
     <Compile Include="commands\OpenWithLexiqueProCommand.cs" />
     <Compile Include="PruneRelationCollection.cs" />
-    <Compile Include="RelationRepository.cs" />
+    <Compile Include="RelationSource.cs" />
     <Compile Include="TweakControls\FilterByPartsOfSpeechControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

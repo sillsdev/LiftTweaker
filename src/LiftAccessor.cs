@@ -8,11 +8,11 @@ namespace Tweaker
 {
     public class LiftAccessor
     {
-        private readonly string _path;
+        private readonly string _pathToLift;
         private XmlDocument _dom;
         public LiftAccessor(string path)
         {
-            _path = path;
+            _pathToLift = path;
             _dom = new XmlDocument();
             Dom.Load(path);
         }
@@ -24,12 +24,12 @@ namespace Tweaker
 
         public string PathToDirectory
         {
-            get { return Path.GetDirectoryName(_path); }
+            get { return Path.GetDirectoryName(_pathToLift); }
         }
 
         public string PathToLift
         {
-            get { return _path; }
+            get { return _pathToLift; }
         }
 
         public string GetEntryFromId(string id)
@@ -52,6 +52,11 @@ namespace Tweaker
                 
                 return nodes[0].InnerText;
             }
+        }
+
+        public LiftRange GetRange(string rangeName)
+        {
+            return new LiftRange(_pathToLift, rangeName);
         }
     }
 }
