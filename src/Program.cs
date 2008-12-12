@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using Autofac;
 
 namespace Tweaker
 {
@@ -10,22 +9,15 @@ namespace Tweaker
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var builder = new Autofac.Builder.ContainerBuilder();
-            
-            builder.RegisterModule(new ShellModule());
-            using (var container = builder.Build())
+            using (var shell = new Shell(args))
             {
-                Application.Run(container.Resolve<Shell>());
+                Application.Run(shell);
             }
         }
-
-
-
-
     }
 }

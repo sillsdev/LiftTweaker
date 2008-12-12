@@ -77,13 +77,29 @@ namespace Tweaker
             target.LoadXml(_liftAccessor.Dom.OuterXml);
             foreach (XmlNode entry in target.SelectNodes("//entry"))
             {
-                foreach (XmlNode relation in entry.SelectNodes("relation"))
+
+                foreach (XmlNode relation in entry.SelectNodes("descendant::relation"))
                 {
                     var r = PruneRelation.Create(relation);
                     if(_pruneRelationRepository.Contains(r))
                     {
                         relation.ParentNode.RemoveChild(relation);
                     }
+                }
+                foreach (XmlNode sense in entry.SelectNodes("sense"))
+                {
+                    var pos = sense.SelectSingleNode("grammatical-info");
+                    if(pos==null)
+                        continue;
+
+                    if (_partsOfSpeechToFilter.Contains(pos.GetAttributeString("value")))
+                    {
+                        sense.ParentNode.RemoveChild(sense);
+                    }
+                } 
+                if(null == entry.SelectSingleNode("sense"))// all senses where trimmed
+                {
+                    entry.ParentNode.RemoveChild(entry);
                 }
             }
             target.Save(PathToOutputLift);

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Windows.Forms;
 using System.Xml;
 
 namespace Tweaker
@@ -16,12 +17,23 @@ namespace Tweaker
         {
             _rangeName = rangeName;
             var s  = pathToLift+"-ranges";
-            _dom = new XmlDocument();
-            _dom.Load(s);
+            if(!File.Exists(s))
+            {
+                MessageBox.Show(string.Format("Could not find a file of 'ranges', which FLEx exports. Was looking for {0}.  You can still tweak other things in the lift file.", s));
+            }
+            else
+            {           
+                _dom = new XmlDocument();
+               _dom.Load(s);
+            }
+
         }
 
         public IEnumerator<LiftRangeItem> GetEnumerator()
         {
+            if(_dom ==null)
+                yield break;
+
             foreach (XmlNode node in _dom.SelectNodes("//range[@id='"+_rangeName+"']/range-element"))
             {
                 yield return new LiftRangeItem(node);
@@ -61,6 +73,14 @@ namespace Tweaker
                 if (node == null)
                     return "(empty)";
                 return node.InnerText;
+            }
+        }
+
+        public string Id
+        {
+            get
+            {
+                return _node.GetAttributeString("id");
             }
         }
     }
