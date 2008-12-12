@@ -67,7 +67,6 @@
     <Compile Include="ShellUI\AreaTree.Designer.cs">
       <DependentUpon>AreaTree.cs</DependentUpon>
     </Compile>
-    <Compile Include="commands\OpenLiftCommand.cs" />
     <Compile Include="commands\ICommand.cs" />
     <Compile Include="TweakControls\PruneRelationsControl.cs">
       <SubType>UserControl</SubType>
