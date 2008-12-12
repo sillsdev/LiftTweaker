@@ -10,11 +10,13 @@ namespace Tweaker
 {
     public partial class FilterByPartsOfSpeechControl : UserControl
     {
+        private readonly LiftAccessor _liftAccessor;
         private readonly LiftRange _partsOfSpeech;
         private readonly FilterRangeItemCollection _partsOfSpeechToFilter;
 
-        public FilterByPartsOfSpeechControl(LiftRange partsOfSpeech, FilterRangeItemCollection partsOfSpeechToFilter)
+        public FilterByPartsOfSpeechControl(LiftAccessor liftAccessor, LiftRange partsOfSpeech, FilterRangeItemCollection partsOfSpeechToFilter)
         {
+            _liftAccessor = liftAccessor;
             _partsOfSpeech = partsOfSpeech;
             _partsOfSpeechToFilter = partsOfSpeechToFilter;
             InitializeComponent();
@@ -29,15 +31,15 @@ namespace Tweaker
             _targetTable.Controls.Clear();
             _targetTable.RowStyles.Clear();
 
-            foreach (var LiftRangeItem in _partsOfSpeech)
+            foreach (var rangeItemId in _liftAccessor.GetPartsOfSpeechInUse())
             {
                 var box = new PosCheckBox((pos) => !_partsOfSpeechToFilter.Contains(pos),
-                    (isChecked, pos) => _partsOfSpeechToFilter.SetContains(pos, !isChecked),
-                    LiftRangeItem)
+                                          (isChecked, pos) => _partsOfSpeechToFilter.SetContains(pos, !isChecked),
+                                          rangeItemId)
                               {
                                   Width = 200,
                                   TabIndex = _targetTable.RowCount,
-                                  Text = LiftRangeItem.Label,
+                                  Text = rangeItemId,//LiftRangeItem.Label,
                                   Padding = new Padding(20, 0, 0, 0)
                               };
 
@@ -51,25 +53,27 @@ namespace Tweaker
         }
         class PosCheckBox : CheckBox
         {
-            private readonly Func<LiftRangeItem, bool> _getValueFunction;
-            private readonly Action<bool, LiftRangeItem> _actionWhenChanged;
-            private readonly LiftRangeItem _pos;
+            private readonly Func<string, bool> _getValueFunction;
+            private readonly Action<bool, string> _actionWhenChanged;
+            private readonly string _rangeItemId;
 
-            public PosCheckBox(Func<LiftRangeItem, bool> getValueFunction,
-                                       Action<bool, LiftRangeItem> actionWhenChanged,
-                                       LiftRangeItem pos)
+            public PosCheckBox(Func<string, bool> getValueFunction,
+                                       Action<bool, string> actionWhenChanged,
+                                       string rangeItemId)
             {
                 _getValueFunction = getValueFunction;
 
+                _rangeItemId = rangeItemId;
+                Checked = _getValueFunction.Invoke(_rangeItemId);
+                //important to do this *after* settin gthe Checked value
                 _actionWhenChanged = actionWhenChanged;
-                _pos = pos;
-                Checked = _getValueFunction.Invoke(_pos);
-            }
+           }
 
             protected override void OnCheckedChanged(EventArgs e)
             {
                 base.OnCheckedChanged(e);
-                _actionWhenChanged.Invoke(Checked, _pos);
+                if (_actionWhenChanged != null) //initial setting event will have this null
+                    _actionWhenChanged.Invoke(Checked, _rangeItemId);
             }
         }
 

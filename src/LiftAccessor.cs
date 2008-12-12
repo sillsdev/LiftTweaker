@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 
@@ -57,6 +58,13 @@ namespace Tweaker
         public LiftRange GetRange(string rangeName)
         {
             return new LiftRange(_pathToLift, rangeName);
+        }
+
+        public IEnumerable<string> GetPartsOfSpeechInUse()
+        {
+            var nodes = _dom.SelectNodes("//grammatical-info/@value");
+            var ids = from XmlNode id in nodes select id.InnerText;
+            return ids.Distinct();
         }
     }
 }

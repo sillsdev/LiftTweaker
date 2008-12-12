@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 using Autofac;
 
@@ -7,12 +8,15 @@ namespace Tweaker
 {
     public partial class Shell : Form
     {
+        private readonly string[] _args;
         private IContainer _sessionContainer;
 
-        public Shell()
+        public Shell(string[] args)
         {
+            _args = args;
             InitializeComponent();
             _areaTreeControl.LoadTweakControl +=(OnTweakControlChanged);
+            _openInLexiqueProButton.Enabled = false;
         }
 
 
@@ -36,7 +40,7 @@ namespace Tweaker
         private void OnOpenInLexiqueProButton_Click(object sender, EventArgs e)
         {
             OpenWithLexiqueProCommand cmd = _sessionContainer.Resolve(typeof(OpenWithLexiqueProCommand)) as OpenWithLexiqueProCommand;
-            cmd.Execute();
+             cmd.Execute();
         }
 
         private void OnChangedTargetChoice(object sender, EventArgs e)
@@ -53,15 +57,31 @@ namespace Tweaker
             var dlg = new OpenFileDialog();
             dlg.CheckFileExists = true;
             dlg.Filter = "Lift Files(*.lift)|*.lift";
+            dlg.AutoUpgradeEnabled = true;
+            
             if(System.Windows.Forms.DialogResult.OK != dlg.ShowDialog())
                 return;
+            
+            if(dlg.FileName.Contains("-") )
+            {
+                int x = dlg.FileName.LastIndexOf("-");
+                var s = dlg.FileName.Substring(0, x);
+                if (File.Exists(s + ".lift"))
+                {
+                    MessageBox.Show(
+                        string.Format(
+                            "Oops.  {0} looks like it's an *output* of a previous run of this program.  Please instead choose an untweaked lift file.",
+                            Path.GetFileName(dlg.FileName)));
 
+                    return;
+                }
+            }
             OpenLiftFile(dlg.FileName);
         }
 
         private void OpenLiftFile(string path)
         {
-            this.Text = "Lift Tweaker = [" +path + "]";
+            this.Text = "Lift Tweaker - " +path ;
             splitContainer1.Panel2.Controls.Clear();
 
             if(_sessionContainer!=null)
@@ -83,13 +103,22 @@ namespace Tweaker
             _sessionContainer = builder.Build();
             
             _areaTreeControl.LoadTweakChoices();
+
+            _openInLexiqueProButton.Enabled = true;
         }
 
 
         private void Shell_Load(object sender, EventArgs e)
         {
-            OpenLiftFile(@"c:\lifttweaker\sample\sample.lift");
+            if(_args.Length > 0 && File.Exists(_args[0]))
+                OpenLiftFile(_args[0]);//@"c:\lifttweaker\sample\sample.lift");
 
+        }
+
+        private void OnAbout(object sender, EventArgs e)
+        {
+            var dlg = new AboutBox();
+            dlg.ShowDialog(this);
         }
     }
 
