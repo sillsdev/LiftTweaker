@@ -89,10 +89,15 @@ namespace Tweaker
                 foreach (XmlNode sense in entry.SelectNodes("sense"))
                 {
                     var pos = sense.SelectSingleNode("grammatical-info");
-                    if(pos==null)
+                    if (pos == null)
+                    {
+                        if (_partsOfSpeechToFilter.ContainsMissingPOS)
+                        {
+                            sense.ParentNode.RemoveChild(sense);
+                        }
                         continue;
-
-                    if (_partsOfSpeechToFilter.Contains(pos.GetAttributeString("value")))
+                    }
+                    if(_partsOfSpeechToFilter.Contains(pos.GetAttributeString("value")))
                     {
                         sense.ParentNode.RemoveChild(sense);
                     }
@@ -127,7 +132,7 @@ namespace Tweaker
             }
         }
 
-        private static string GetPathToTweakFile(string pathToLift, string name)
+        public static string GetPathToTweakFile(string pathToLift, string name)
         {
             var pathWithoutDotLift = pathToLift.Substring(0,pathToLift.LastIndexOf(".lift"));
             return pathWithoutDotLift + "-" + name + ".liftTweaks";
