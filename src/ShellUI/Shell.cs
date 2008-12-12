@@ -58,6 +58,7 @@ namespace Tweaker
             dlg.CheckFileExists = true;
             dlg.Filter = "Lift Files(*.lift)|*.lift";
             dlg.AutoUpgradeEnabled = true;
+            dlg.Title = "Open Lift File (WeSay or Export From FLEx)";
             
             if(System.Windows.Forms.DialogResult.OK != dlg.ShowDialog())
                 return;
