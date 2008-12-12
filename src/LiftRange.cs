@@ -50,12 +50,16 @@ namespace Tweaker
     {
         private readonly XmlNode _node;
 
+        protected LiftRangeItem() //for subclass
+        {
+            _node = null;
+        }
         public LiftRangeItem(XmlNode node)
         {
             _node = node;
         }
 
-        public string Label
+        public virtual string Label
         {
             get
             {
@@ -65,7 +69,7 @@ namespace Tweaker
                 return node.InnerText;
             }
         }
-        public string Abbreviation
+        public virtual string Abbreviation
         {
             get
             {
@@ -76,11 +80,43 @@ namespace Tweaker
             }
         }
 
-        public string Id
+        public virtual string Id
         {
             get
             {
                 return _node.GetAttributeString("id");
+            }
+        }
+    }
+
+    public class MissingLiftRangeItem : LiftRangeItem
+    {
+        private string _label;
+        public MissingLiftRangeItem(string label)
+        {
+            _label = label;
+        }
+        public override string Abbreviation
+        {
+            get
+            {
+                return "(empty)";
+            }
+        }
+
+        public override string Id
+        {
+            get
+            {
+                return "Senses with no Part Of Speech";
+            }
+        }
+
+        public override string Label
+        {
+            get
+            {
+                return _label;
             }
         }
     }

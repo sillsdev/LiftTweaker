@@ -32,7 +32,7 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this._openLiftButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.label = new System.Windows.Forms.ToolStripLabel();
+            this._toolstripLabel = new System.Windows.Forms.ToolStripLabel();
             this._targetDocumentCombo = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this._openInLexiqueProButton = new System.Windows.Forms.ToolStripButton();
@@ -52,7 +52,7 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._openLiftButton,
             this.toolStripSeparator1,
-            this.label,
+            this._toolstripLabel,
             this._targetDocumentCombo,
             this.toolStripSeparator2,
             this._openInLexiqueProButton,
@@ -69,7 +69,8 @@
             this._openLiftButton.Image = ((System.Drawing.Image)(resources.GetObject("_openLiftButton.Image")));
             this._openLiftButton.ImageTransparentColor = System.Drawing.Color.Black;
             this._openLiftButton.Name = "_openLiftButton";
-            this._openLiftButton.Size = new System.Drawing.Size(23, 22);
+            this._openLiftButton.Size = new System.Drawing.Size(124, 22);
+            this._openLiftButton.Text = "Open LIFT Lexicon";
             this._openLiftButton.ToolTipText = "Choose LIFT file to tweak";
             this._openLiftButton.Click += new System.EventHandler(this.OnOpenLiftButton_Click);
             // 
@@ -78,13 +79,13 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // label
+            // _toolstripLabel
             // 
-            this.label.Enabled = false;
-            this.label.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.label.Name = "label";
-            this.label.Size = new System.Drawing.Size(130, 22);
-            this.label.Text = "Output Dictionary Style:";
+            this._toolstripLabel.Enabled = false;
+            this._toolstripLabel.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this._toolstripLabel.Name = "_toolstripLabel";
+            this._toolstripLabel.Size = new System.Drawing.Size(130, 22);
+            this._toolstripLabel.Text = "Output Dictionary Style:";
             // 
             // _targetDocumentCombo
             // 
@@ -109,7 +110,8 @@
             this._openInLexiqueProButton.Image = ((System.Drawing.Image)(resources.GetObject("_openInLexiqueProButton.Image")));
             this._openInLexiqueProButton.ImageTransparentColor = System.Drawing.Color.White;
             this._openInLexiqueProButton.Name = "_openInLexiqueProButton";
-            this._openInLexiqueProButton.Size = new System.Drawing.Size(23, 22);
+            this._openInLexiqueProButton.Size = new System.Drawing.Size(133, 22);
+            this._openInLexiqueProButton.Text = "Open in Lexique Pro";
             this._openInLexiqueProButton.ToolTipText = "Open Tweaked File in Lexique Pro";
             this._openInLexiqueProButton.Click += new System.EventHandler(this.OnOpenInLexiqueProButton_Click);
             // 
@@ -197,7 +199,7 @@
         private System.Windows.Forms.ToolStripButton _openLiftButton;
         private System.Windows.Forms.ToolStripComboBox _targetDocumentCombo;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripLabel label;
+        private System.Windows.Forms.ToolStripLabel _toolstripLabel;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripButton toolStripButton1;

@@ -31,13 +31,17 @@ namespace Tweaker
             _targetTable.Controls.Clear();
             _targetTable.RowStyles.Clear();
 
-            foreach (var rangeItemId in _liftAccessor.GetPartsOfSpeechInUse())
+            var inUse = _liftAccessor.GetPartsOfSpeechInUse();
+            List<string> itemsToShow = new List<string>(inUse);
+            itemsToShow.Add(FilterRangeItemCollection.MissingItemMatcher.Id);
+
+            foreach (var rangeItemId in itemsToShow)
             {
                 var box = new PosCheckBox((pos) => !_partsOfSpeechToFilter.Contains(pos),
                                           (isChecked, pos) => _partsOfSpeechToFilter.SetContains(pos, !isChecked),
                                           rangeItemId)
                               {
-                                  Width = 200,
+                                  Width =300,
                                   TabIndex = _targetTable.RowCount,
                                   Text = rangeItemId,//LiftRangeItem.Label,
                                   Padding = new Padding(20, 0, 0, 0)

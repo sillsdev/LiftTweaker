@@ -8,12 +8,18 @@ namespace Tweaker
     public class FilterRangeItemCollection
     {
         private List<string> _idsOfItemsToFilter = new List<string>();
+        static public LiftRangeItem MissingItemMatcher = new MissingLiftRangeItem("Senses without a Part Of Speech");
 
         //for serialization
         public List<string> IdsOfItemsToFilter
         {
             get { return _idsOfItemsToFilter; }
             set { _idsOfItemsToFilter = value; }
+        }
+
+        public bool ContainsMissingPOS
+        {
+            get { return Contains(MissingItemMatcher); }
         }
 
         public bool Contains(LiftRangeItem item)
